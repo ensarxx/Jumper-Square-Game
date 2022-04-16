@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Advertisements;
+using GoogleMobileAds.Api;
 public class DeadMenu : MonoBehaviour
 {
     public GameObject DeadMenuUI;
@@ -22,13 +22,15 @@ public class DeadMenu : MonoBehaviour
 
     public int gostermesayisirestart;
 
+    private InterstitialAd interstitial;
+
     //void Start()
-   //{
-        //gostermesayisirestart = PlayerPrefs.GetInt("gostermesayisirestart");
-      //  DeadMenuUI.SetActive(false);
+    //{
+    //gostermesayisirestart = PlayerPrefs.GetInt("gostermesayisirestart");
+    //  DeadMenuUI.SetActive(false);
     //    TransparentDeadUI.SetActive(false);
-        
-  //  }
+
+    //  }
 
     string gameId = "3839380";
 
@@ -36,23 +38,29 @@ public class DeadMenu : MonoBehaviour
 
     bool testMode = true;
 
-    IEnumerator Start()
+    void Start()
     {
         gostermesayisirestart = PlayerPrefs.GetInt("gostermesayisirestart");
         DeadMenuUI.SetActive(false);
         TransparentDeadUI.SetActive(false);
         gostermesayisirestart = PlayerPrefs.GetInt("gostermesayisirestart");
-        Advertisement.Initialize(gameId, testMode);
 
-        while(!Advertisement.IsReady(placementId))
-        yield return null;
+        RequestInterstitial();
+    }
+
+    private void RequestInterstitial()
+    {
+
+        string adUnitId = "ca-app-pub-3253759534064842/5893312127";
 
 
-        
-        
-        
-        
-        
+        // Initialize an InterstitialAd.
+        this.interstitial = new InterstitialAd(adUnitId);
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+        // Load the interstitial with the request.
+        this.interstitial.LoadAd(request);
     }
 
     public void dead(){
@@ -67,6 +75,14 @@ public class DeadMenu : MonoBehaviour
 
     }
 
+    public void CallInterstitial()
+    {
+        if (this.interstitial.IsLoaded())
+        {
+            this.interstitial.Show();
+        }
+    }
+
 
 
     public void restart(){
@@ -77,7 +93,7 @@ public class DeadMenu : MonoBehaviour
 
             if (gostermesayisirestart == -4)
             {
-                Advertisement.Show(placementId);
+                CallInterstitial();
                 gostermesayisirestart = 0;
                 PlayerPrefs.SetInt("gostermesayisirestart", gostermesayisirestart);
             }

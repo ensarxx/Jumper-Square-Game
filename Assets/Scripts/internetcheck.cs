@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class internetcheck : MonoBehaviour
 {
-    // Start is called before the first frame update
-    
+
+
+    void Start()
+    {
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            Debug.Log("Error. Check internet connection!");
+        }
+        else
+        {
+            Debug.Log("internet is reachable");
+        }
+    }
+
 }

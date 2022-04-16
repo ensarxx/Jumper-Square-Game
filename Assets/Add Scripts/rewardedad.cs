@@ -1,37 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Advertisements;
-
+using GoogleMobileAds.Api;
 public class rewardedad : MonoBehaviour
 {
-    string gameId = "3839380";
 
-    string placementId = "rewardedVideo";
 
-    bool testMode = true;
 
     
+    private RewardedAd rewardedAd;
+
     
-    IEnumerator Start()
+    private string rewardedAd_ID;
+
+    void Start()
     {
-        Advertisement.Initialize(gameId, testMode);
+        
+        rewardedAd_ID = "ca-app-pub-3253759534064842/1632888510";
 
-        while(!Advertisement.IsReady(placementId))
-        yield return null;
-
+        MobileAds.Initialize(initStatus => { });
 
         
-      
-        
-        
+        RequestRewardedVideo();
+
     }
 
+    private void RequestRewardedVideo()
+    {
+        rewardedAd = new RewardedAd(rewardedAd_ID);
+        //rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        //rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        //rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        AdRequest request = new AdRequest.Builder().Build();
+        rewardedAd.LoadAd(request);
+    }
+
+
+
+    
     public void callrewardedad(){
-        if (Advertisement.IsReady(placementId)) {
-        Advertisement.Show(placementId);
-        GameControlScript.moneyAmount += 100;
+       
+        if (rewardedAd.IsLoaded())
+        {
+            rewardedAd.Show();
+            GameControlScript.moneyAmount += 100;
         }
-        
+
     }
 }

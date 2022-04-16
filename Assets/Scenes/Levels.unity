@@ -689,7 +689,8 @@ MonoBehaviour:
   level12_button: {fileID: 1216037060}
   level13_button: {fileID: 2080027430}
   level14_button: {fileID: 1752493312}
-  level15_button: {fileID: 0}
+  level15_button: {fileID: 966176558}
+  level16_button: {fileID: 1755918877}
   iflevel2unlocked: 0
   iflevel3unclocked: 0
   iflevel4unlocked: 0
@@ -1809,6 +1810,49 @@ Transform:
   - {fileID: 1934950445}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &765758742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765758744}
+  - component: {fileID: 765758743}
+  m_Layer: 0
+  m_Name: AdController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &765758743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765758742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4203e2ffd30c664429eff6d14ed6d6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &765758744
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765758742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 469.2514, y: 234.4019, z: -9.5625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &936642776
 GameObject:

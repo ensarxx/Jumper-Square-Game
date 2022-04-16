@@ -14,10 +14,11 @@ public class GameControlScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//PlayerPrefs.DeleteAll();
 		moneyAmount = PlayerPrefs.GetInt ("MoneyAmount");
 		//watchadskiplevel.destroyskipbutton();
 		
-		
+		//PlayerPrefs. DeleteAll();// debugging için
 		
 		
 	}

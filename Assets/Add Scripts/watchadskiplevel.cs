@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI;
+using GoogleMobileAds.Api;
 
 
 
@@ -23,84 +23,87 @@ public class watchadskiplevel : MonoBehaviour
 
     public DeadMenu deadMenu;
     
-    
-
-    
-  string gameId = "3839380";
-
-    string placementId = "skiplevelRewardedAd";
-
-    bool testMode = true;
-    
-    
-
-    
+    public rewardedad rewardedad;
 
 
+    //ad
+    private RewardedAd rewardedAd;
 
 
-    
-    
-    IEnumerator Start()
+    private string rewardedAd_ID;
+    //
+
+    void Start()
     {
-        
-            earncoins_button.SetActive(false);
-        //string asddsa = SceneManager.GetActiveScene().ToString();
-        Advertisement.Initialize(gameId, testMode);
+        earncoins_button.SetActive(false);
+        skiplevel_button_gameobject.SetActive(true);
 
-        while(!Advertisement.IsReady(placementId))
-        yield return null;
-        
-        
-        
+        rewardedAd_ID = "ca-app-pub-3253759534064842/1632888510";
+        Debug.Log("burası çalışıyor *watchadskiplevel start fonksiyonu*");
+        MobileAds.Initialize(initStatus => { });
 
 
-        
-        
-        
-        
-        
+        RequestRewardedVideo();
     }
 
-    
- 
 
- 
+
+    public void RequestRewardedVideo()
+    {
+        rewardedAd = new RewardedAd(rewardedAd_ID);
+        //rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        //rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        //rewardedAd.OnAdFailedToShow += HandleRewardedAdFailedToShow;
+        AdRequest request = new AdRequest.Builder().Build();
+        rewardedAd.LoadAd(request);
+    }
+
     public void skiplevel(){
-        //
+        
         Debug.Log("skiplevel !");
 
-        deadMenu.dead();
+        
 
-        //
-         Advertisement.Show(placementId);
-         Scene currentScene = SceneManager.GetActiveScene ();
-        string level = currentScene.name;
-        if (level.Length == 7)
+
+
+        //rewardedad.callrewardedad();
+        if (rewardedAd.IsLoaded())
         {
-            int yy = int.Parse(level[level.Length-2].ToString() + int.Parse(level[level.Length-1].ToString()));
+            rewardedAd.Show();
+            deadMenu.dead();
+            ///////////////////////////////////////////////////
+            Scene currentScene = SceneManager.GetActiveScene();
+            string level = currentScene.name;
+            Debug.Log(level);
+            if (level.Length == 7)
+            {
+                int yy = int.Parse(level[level.Length - 2].ToString() + int.Parse(level[level.Length - 1].ToString()));
 
-            Debug.Log(yy);
-            yy++;
-            zz = "iflevel"+yy.ToString()+"unlocked";//islevel13unlocked 
-            PlayerPrefs.SetInt(zz,1);
-            
+                Debug.Log(yy);
+                yy++;
+                zz = "iflevel" + yy.ToString() + "unlocked";//islevel13unlocked 
+                Debug.Log("BURADAYIM");
+                PlayerPrefs.SetInt(zz, 1);
+
+            }
+            else
+            {
+
+
+                int xx = int.Parse(level[level.Length - 1].ToString());
+                xx++;
+                string ff = "iflevel" + xx.ToString() + "unlocked";
+                Debug.Log(ff.ToString());
+                PlayerPrefs.SetInt(ff, 1);
+            }
+
+            ///////////////////////////////////////////////////
         }
-        else{
-            
-       
-        int xx = int.Parse(level[level.Length-1].ToString());
-        xx++;
-        string ff = "iflevel"+xx.ToString()+"unlocked";
-        PlayerPrefs.SetInt(ff, 1);
-        }
+        
         
     }
 
-    public void level1skiplevel(){
-        
-        
-    }
+    
 
     public void destroyskipbutton(){    
         Scene currentScene = SceneManager.GetActiveScene ();
@@ -129,6 +132,7 @@ public class watchadskiplevel : MonoBehaviour
             
             
             zz = "iflevel"+yy.ToString()+"unlocked";//islevel13unlocked 
+            //Debug.Log("zz ="+zz+"" );
         }
         
         if (PlayerPrefs.GetInt(zz) == 1)

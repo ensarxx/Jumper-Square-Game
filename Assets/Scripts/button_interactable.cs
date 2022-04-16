@@ -19,9 +19,10 @@ public class button_interactable : MonoBehaviour
     public Button level13_button;
     public Button level14_button;
     public Button level15_button;
+    public Button level16_button;
 
 
-    
+
 
 
 
@@ -84,6 +85,7 @@ public class button_interactable : MonoBehaviour
         level13_button.interactable = false;
         level14_button.interactable = false;
         level15_button.interactable = false;
+        level16_button.interactable = false;
     }
 
     void Update()
@@ -149,9 +151,18 @@ public class button_interactable : MonoBehaviour
         {
             level14_button.interactable = true;
         }
+        if (PlayerPrefs.GetInt("iflevel15unlocked") == 1)
+        {
+            level15_button.interactable = true;
+        }
+        if (PlayerPrefs.GetInt("iflevel16unlocked") == 1)
+        {
+            level16_button.interactable = true;
+        }
 
-            
-        
+
+
+
 
     }
 }

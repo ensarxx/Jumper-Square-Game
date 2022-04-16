@@ -105,8 +105,14 @@ public class PortalScript : MonoBehaviour
             deadMenu.dead();
             PlayerPrefs.SetInt("iflevel14unlocked",1);
             break;    
-                      
-                    
+        case "level14_endportal":
+            deadMenu.dead();
+            PlayerPrefs.SetInt("iflevel15unlocked",1);
+            break;                  
+        case "level15_endportal":
+            deadMenu.dead();
+            PlayerPrefs.SetInt("iflevel16unlocked",1);
+            break;            
 
         }
         
